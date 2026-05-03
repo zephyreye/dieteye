@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriCore — Plaquette de présentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage:    #4a6741;
+    --sage-lt: #7a9a72;
+    --sage-xs: #c8dbc5;
+    --cream:   #f7f3ec;
+    --warm:    #e8dfd0;
+    --clay:    #b07c5a;
+    --ink:     #1c2318;
+    --ink-50:  rgba(28,35,24,0.5);
+    --gold:    #c9a84c;
+    --white:   #ffffff;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    min-height: 100vh;
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .orb { position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none; }
+  .orb1 { width:600px;height:600px;background:rgba(74,103,65,.35);top:-100px;right:-50px; }
+  .orb2 { width:400px;height:400px;background:rgba(201,168,76,.1);bottom:-80px;left:10%; }
+  .orb3 { width:300px;height:300px;background:rgba(122,154,114,.18);top:40%;left:30%; }
+
+  .hero-left {
+    display:flex;flex-direction:column;justify-content:center;
+    padding:80px 60px 80px 80px;position:relative;z-index:2;
+  }
+  .badge {
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(74,103,65,.3);border:1px solid rgba(122,154,114,.4);
+    color:var(--sage-xs);font-size:.7rem;font-weight:500;
+    letter-spacing:.15em;text-transform:uppercase;
+    padding:6px 14px;border-radius:100px;width:fit-content;margin-bottom:36px;
+  }
+  .badge::before {
+    content:'';width:6px;height:6px;border-radius:50%;
+    background:var(--sage-lt);display:block;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+  .hero-title {
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(3rem,5vw,5.5rem);line-height:1;color:var(--white);
+  }
+  .hero-title em { font-style:italic;color:var(--sage-lt); }
+  .hero-title .g { color:var(--gold); }
+  .hero-sub {
+    font-size:1rem;color:rgba(255,255,255,.5);
+    max-width:440px;margin-top:24px;line-height:1.85;
+  }
+
+  .hero-left > * { animation:fadeUp .8s ease both; }
+  .badge      { animation-delay:.1s; }
+  .hero-title { animation-delay:.25s; }
+  .hero-sub   { animation-delay:.4s; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+  .hero-right {
+    display:flex;align-items:center;justify-content:center;
+    padding:80px 80px 80px 20px;position:relative;z-index:2;
+    animation:fadeUp .9s ease .4s both;
+  }
+  .phone {
+    width:260px;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    border-radius:36px;padding:20px 16px;
+    box-shadow:0 40px 80px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);
+  }
+  .phone-notch {
+    width:80px;height:8px;background:rgba(255,255,255,.15);
+    border-radius:100px;margin:0 auto 16px;
+  }
+  .phone-screen {
+    background:linear-gradient(160deg,#1a2e17,#0f1a0c);
+    border-radius:24px;padding:20px 16px;min-height:460px;
+  }
+  .ph-label { font-size:.5rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px; }
+  .ph-title { font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:white;font-weight:300;margin-bottom:18px; }
+  .score-box {
+    display:flex;align-items:center;gap:12px;
+    background:rgba(74,103,65,.2);border:1px solid rgba(122,154,114,.2);
+    border-radius:14px;padding:12px;margin-bottom:14px;
+  }
+  .score-val { font-size:.95rem;color:white;font-weight:500; }
+  .score-sub { font-size:.5rem;color:var(--sage-lt);margin-top:2px; }
+  .cbar { margin-bottom:7px; }
+  .cbar-row { display:flex;justify-content:space-between;font-size:.5rem;color:rgba(255,255,255,.55);margin-bottom:3px; }
+  .cbar-track { height:3px;background:rgba(255,255,255,.07);border-radius:2px; }
+  .cbar-fill { height:100%;border-radius:2px; }
+  .f-low { background:#e07b5a;width:28%; }
+  .f-mid { background:var(--gold);width:55%; }
+  .f-ok  { background:var(--sage-lt);width:82%; }
+  .menu-box { background:rgba(255,255,255,.05);border-radius:10px;padding:10px;margin-top:12px; }
+  .menu-row { display:flex;align-items:center;gap:7px;margin-bottom:7px; }
+  .menu-icon { font-size:.9rem; }
+  .menu-name { font-size:.55rem;color:white; }
+  .menu-tag  { font-size:.48rem;color:var(--sage-lt); }
+  .menu-kcal { font-size:.5rem;color:rgba(255,255,255,.28);margin-left:auto;flex-shrink:0; }
+
+  /* ══ SECTIONS COMMUNES ══ */
+  .s-label { font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:18px; }
+  .s-title { font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.6rem);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:20px; }
+  .s-title em { font-style:italic;color:var(--clay); }
+  .s-body { font-size:.95rem;color:var(--ink-50);line-height:1.85;max-width:480px; }
+
+  /* ══ CONSTAT ══ */
+  .sec-constat {
+    background:var(--cream);padding:120px 80px;
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  }
+  .stat-grid { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+  .stat-card {
+    background:var(--white);border:1px solid var(--warm);
+    border-radius:20px;padding:28px;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .stat-card:hover { transform:translateY(-4px);box-shadow:0 16px 36px rgba(28,35,24,.07); }
+  .stat-num { font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1;color:var(--sage);margin-bottom:8px; }
+  .stat-num sup { font-size:1.4rem; }
+  .stat-desc   { font-size:.78rem;color:var(--ink-50);line-height:1.6; }
+  .stat-source { font-size:.63rem;color:rgba(28,35,24,.28);margin-top:6px;font-style:italic; }
+
+  /* ══ FONCTIONNALITÉS ══ */
+  .sec-feat { background:var(--ink);padding:120px 80px;position:relative;overflow:hidden; }
+  .sec-feat::before {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 70% 60% at 80% 20%,rgba(74,103,65,.14) 0%,transparent 70%),
+               radial-gradient(ellipse 50% 50% at 10% 80%,rgba(201,168,76,.07) 0%,transparent 60%);
+  }
+  .feat-header { text-align:center;margin-bottom:72px;position:relative;z-index:1; }
+  .feat-header .s-label { color:var(--sage-lt); }
+  .feat-header .s-title { color:var(--white); }
+  .feat-header .s-title em { color:var(--gold); }
+  .feat-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;z-index:1; }
+  .feat-card {
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+    border-radius:22px;padding:34px 30px;
+    transition:border-color .35s,transform .35s,background .35s;
+    position:relative;overflow:hidden;
+  }
+  .feat-card::before {
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(74,103,65,.12),transparent 60%);
+    opacity:0;transition:opacity .35s;
+  }
+  .feat-card:hover { border-color:rgba(122,154,114,.3);transform:translateY(-5px); }
+  .feat-card:hover::before { opacity:1; }
+  .feat-icon {
+    width:50px;height:50px;background:rgba(74,103,65,.25);
+    border:1px solid rgba(122,154,114,.22);border-radius:13px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;margin-bottom:22px;transition:background .3s;
+  }
+  .feat-card:hover .feat-icon { background:rgba(74,103,65,.4); }
+  .feat-title { font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:var(--white);margin-bottom:10px;line-height:1.2; }
+  .feat-desc  { font-size:.82rem;color:rgba(255,255,255,.48);line-height:1.75; }
+  .feat-chip  {
+    display:inline-block;margin-top:18px;font-size:.62rem;font-weight:500;
+    letter-spacing:.08em;text-transform:uppercase;
+    color:var(--sage-lt);background:rgba(122,154,114,.12);padding:3px 10px;border-radius:100px;
+  }
+
+  /* ══ PARCOURS ══ */
+  .sec-flow { background:var(--cream);padding:120px 80px; }
+  .flow-header { text-align:center;margin-bottom:80px; }
+  .flow-steps { display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative; }
+  .flow-steps::before {
+    content:'';position:absolute;
+    top:35px;left:12.5%;right:12.5%;height:1px;
+    background:linear-gradient(90deg,transparent,var(--sage-xs),var(--sage-xs),transparent);
+  }
+  .flow-step { display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px; }
+  .flow-num {
+    width:70px;height:70px;border-radius:50%;
+    background:var(--white);border:2px solid var(--sage-xs);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--sage);
+    margin-bottom:22px;position:relative;z-index:1;
+    box-shadow:0 6px 20px rgba(74,103,65,.1);transition:all .3s;
+  }
+  .flow-step:hover .flow-num { background:var(--sage);color:white;border-color:var(--sage);box-shadow:0 10px 28px rgba(74,103,65,.3); }
+  .flow-emoji { font-size:1.3rem;margin-bottom:14px; }
+  .flow-title { font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--ink);margin-bottom:8px; }
+  .flow-desc  { font-size:.78rem;color:var(--ink-50);line-height:1.7; }
+
+  /* ══ EXEMPLE MENU ══ */
+  .sec-demo {
+    background:linear-gradient(160deg,#f0ede6,var(--cream));
+    padding:120px 80px;
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  }
+  .demo-chips { display:flex;gap:10px;flex-wrap:wrap;margin-top:24px; }
+  .chip { font-size:.72rem;font-weight:500;padding:7px 14px;border-radius:100px; }
+  .chip-g { background:var(--sage-xs);color:var(--sage); }
+  .chip-c { background:#fae9df;color:var(--clay); }
+  .chip-o { background:#faf3e0;color:#8a6d2a; }
+
+  .menu-card { background:var(--white);border-radius:28px;padding:36px;box-shadow:0 24px 56px rgba(28,35,24,.07);border:1px solid var(--warm); }
+  .menu-card-head { display:flex;align-items:center;gap:14px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--warm); }
+  .menu-av { width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--sage-lt),var(--sage));display:flex;align-items:center;justify-content:center;font-size:1rem; }
+  .menu-uname { font-size:.85rem;font-weight:500;color:var(--ink); }
+  .menu-usub  { font-size:.7rem;color:var(--ink-50);margin-top:2px; }
+  .menu-badge { margin-left:auto;background:var(--sage);color:white;font-size:.58rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px; }
+  .menu-day-label { font-size:.62rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);margin-bottom:12px; }
+  .meal-row { display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--warm); }
+  .meal-row:last-child { border-bottom:none; }
+  .meal-time { font-size:.62rem;color:var(--ink-50);width:46px;flex-shrink:0;padding-top:2px; }
+  .meal-info { flex:1; }
+  .meal-name { font-size:.82rem;font-weight:500;color:var(--ink);margin-bottom:4px; }
+  .meal-pills { display:flex;gap:6px;flex-wrap:wrap; }
+  .pill { font-size:.58rem;font-weight:500;padding:2px 7px;border-radius:100px; }
+  .pg { background:#e8f4e5;color:var(--sage); }
+  .po { background:#faf3e0;color:#8a6d2a; }
+  .pc { background:#faeae3;color:var(--clay); }
+  .meal-note { display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-size:.58rem;color:var(--sage);background:rgba(74,103,65,.08);padding:2px 9px;border-radius:100px; }
+  .meal-note::before { content:'↑';font-weight:700; }
+  .meal-kcal { font-size:.72rem;color:var(--ink-50);flex-shrink:0;font-weight:500; }
+
+  /* ══ OBJECTIFS ══ */
+  .sec-goals { background:var(--ink);padding:100px 80px;position:relative;overflow:hidden; }
+  .sec-goals::before {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(74,103,65,.1),transparent 70%);
+  }
+  .goals-head { text-align:center;margin-bottom:60px;position:relative;z-index:1; }
+  .goals-head .s-label { color:var(--sage-lt); }
+  .goals-head .s-title { color:white; }
+  .goals-head .s-title em { color:var(--gold); }
+  .goals-grid { display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative;z-index:1; }
+  .goal-pill { background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:100px;padding:18px 14px;text-align:center;transition:all .3s; }
+  .goal-pill:hover { background:rgba(74,103,65,.25);border-color:rgba(122,154,114,.35);transform:translateY(-3px); }
+  .goal-emoji { font-size:1.4rem;display:block;margin-bottom:7px; }
+  .goal-label { font-size:.68rem;color:rgba(255,255,255,.6);line-height:1.4; }
+
+  /* ══ CAS D'USAGE ══ */
+  .sec-cases { background:var(--cream);padding:120px 80px; }
+  .cases-head { text-align:center;margin-bottom:60px; }
+  .cases-head .note { font-size:.78rem;color:var(--ink-50);margin-top:12px;font-style:italic; }
+  .cases-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:22px; }
+  .case-card { background:var(--white);border:1px solid var(--warm);border-radius:22px;padding:34px;transition:transform .3s,box-shadow .3s; }
+  .case-card:hover { transform:translateY(-4px);box-shadow:0 16px 36px rgba(28,35,24,.07); }
+  .case-icon { font-size:2rem;margin-bottom:16px; }
+  .case-chip { display:inline-block;font-size:.6rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px;margin-bottom:14px; }
+  .cc1 { background:#e8f4e5;color:var(--sage); }
+  .cc2 { background:#fae9df;color:var(--clay); }
+  .cc3 { background:#e8e4f6;color:#5a4aaa; }
+  .case-title { font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--ink);margin-bottom:10px; }
+  .case-desc  { font-size:.82rem;color:var(--ink-50);line-height:1.75; }
+  .case-profile { font-size:.72rem;color:var(--ink-50);margin-top:16px;font-weight:500; }
+
+  /* ══ FIN ══ */
+  .sec-end { background:linear-gradient(135deg,var(--sage),#2e4a2a);padding:100px 80px;text-align:center;position:relative;overflow:hidden; }
+  .sec-end::before {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background-size:256px;
+  }
+  .end-label { color:var(--sage-xs);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px;position:relative;z-index:1; }
+  .end-title { font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,4.2rem);font-weight:300;color:white;line-height:1.1;margin-bottom:20px;position:relative;z-index:1; }
+  .end-title em { font-style:italic;color:var(--gold); }
+  .end-sub { font-size:.95rem;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto;line-height:1.85;position:relative;z-index:1; }
+  .end-contact { margin-top:36px;font-size:.95rem;color:rgba(255,255,255,.7);position:relative;z-index:1; }
+  .end-contact strong { color:white; }
+
+  /* ══ FOOTER ══ */
+  footer { background:var(--ink);padding:36px 80px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.07); }
+  .footer-logo { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:white; }
+  .footer-logo span { color:var(--sage-lt); }
+  .footer-copy { font-size:.7rem;color:rgba(255,255,255,.22); }
+
+  /* ══════════════════════════════
+     RESPONSIVE — TABLET (≤ 960px)
+  ══════════════════════════════ */
+  @media (max-width:960px) {
+    /* Grilles 2 colonnes → 1 colonne */
+    .hero,
+    .sec-constat,
+    .sec-demo { grid-template-columns: 1fr; }
+
+    /* Mockup téléphone caché sur tablette */
+    .hero-right { display: none; }
+
+    /* Hero texte centré */
+    .hero-left {
+      padding: 72px 48px;
+      align-items: center;
+      text-align: center;
+    }
+    .badge { align-self: center; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+
+    /* Features : 2 colonnes */
+    .feat-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Parcours : 2 colonnes, ligne de connexion masquée */
+    .flow-steps { grid-template-columns: 1fr 1fr; row-gap: 48px; }
+    .flow-steps::before { display: none; }
+
+    /* Objectifs : 3 colonnes */
+    .goals-grid { grid-template-columns: repeat(3, 1fr); }
+
+    /* Cas d'usage : 1 colonne */
+    .cases-grid { grid-template-columns: 1fr; }
+
+    /* Réduction padding sections */
+    .sec-constat,
+    .sec-feat,
+    .sec-flow,
+    .sec-demo,
+    .sec-goals,
+    .sec-cases,
+    .sec-end { padding: 80px 48px; }
+
+    /* Stats : 2 colonnes conservées */
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Demo : texte avant carte */
+    .sec-demo { gap: 48px; }
+
+    /* Footer */
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px; }
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE — MOBILE (≤ 600px)
+  ══════════════════════════════ */
+  @media (max-width:600px) {
+
+    /* Hero */
+    .hero-left { padding: 56px 24px 64px; }
+    .hero-title { font-size: clamp(2.6rem, 10vw, 3.5rem); }
+    .hero-sub { font-size: .9rem; }
+
+    /* Sections padding réduit */
+    .sec-constat,
+    .sec-feat,
+    .sec-flow,
+    .sec-demo,
+    .sec-goals,
+    .sec-cases,
+    .sec-end { padding: 60px 20px; }
+
+    /* Stats : 1 colonne sur mobile */
+    .stat-grid { grid-template-columns: 1fr; gap: 14px; }
+
+    /* Features : 1 colonne */
+    .feat-grid { grid-template-columns: 1fr; gap: 16px; }
+    .feat-card { padding: 26px 22px; }
+
+    /* Parcours : 1 colonne */
+    .flow-steps { grid-template-columns: 1fr; row-gap: 36px; }
+
+    /* Objectifs : 2 colonnes */
+    .goals-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .goal-pill { border-radius: 16px; padding: 16px 10px; }
+
+    /* Cas d'usage : 1 colonne (déjà fait, padding réduit) */
+    .case-card { padding: 26px 22px; }
+
+    /* Demo chips wrap */
+    .demo-chips { flex-direction: column; gap: 8px; }
+    .chip { text-align: center; }
+
+    /* Menu card */
+    .menu-card { padding: 24px 18px; }
+    .menu-card-head { flex-wrap: wrap; gap: 10px; }
+    .menu-badge { margin-left: 0; }
+    .meal-row { flex-wrap: wrap; gap: 8px; }
+    .meal-kcal { width: 100%; text-align: right; }
+
+    /* Titre sections */
+    .s-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+
+    /* Fin */
+    .end-title { font-size: clamp(2rem, 8vw, 3rem); }
+
+    /* Footer */
+    footer { padding: 24px 20px; gap: 10px; }
+    .footer-copy { font-size: .62rem; text-align: center; }
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE — TRÈS PETIT (≤ 380px)
+  ══════════════════════════════ */
+  @media (max-width:380px) {
+    .goals-grid { grid-template-columns: 1fr 1fr; }
+    .feat-grid  { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.4rem; }
+    .badge { font-size: .6rem; padding: 5px 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-left">
+    <div class="badge">Intelligence Nutritionnelle · Propulsé par IA</div>
+    <h1 class="hero-title">
+      Votre corps<br>
+      <em>sait ce dont</em><br>
+      il a <span class="g">besoin.</span>
+    </h1>
+    <p class="hero-sub">
+      NutriCore vous aide à mieux comprendre vos apports nutritionnels et génère des suggestions de menus adaptées à vos objectifs déclarés — plat par plat, nutriment par nutriment.
+    </p>
+  </div>
+
+  <div class="hero-right">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <p class="ph-label">Exemple illustratif</p>
+        <p class="ph-title">Profil fictif 👤</p>
+
+        <div class="score-box">
+          <svg width="52" height="52" viewBox="0 0 52 52">
+            <circle cx="26" cy="26" r="21" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="4"/>
+            <circle cx="26" cy="26" r="21" fill="none" stroke="#7a9a72" stroke-width="4"
+              stroke-dasharray="131.9" stroke-dashoffset="40" stroke-linecap="round"
+              transform="rotate(-90 26 26)"/>
+            <text x="26" y="30" text-anchor="middle" fill="white" font-size="10" font-family="serif">72</text>
+          </svg>
+          <div>
+            <div class="ph-label">Score illustratif</div>
+            <div class="score-val">72 / 100</div>
+            <div class="score-sub">Profil fictif</div>
+          </div>
+        </div>
+
+        <div class="ph-label" style="margin-bottom:8px">Apports insuffisants détectés</div>
+        <div class="cbar">
+          <div class="cbar-row"><span>Vitamine D</span><span style="color:#e07b5a">Faible</span></div>
+          <div class="cbar-track"><div class="cbar-fill f-low"></div></div>
+        </div>
+        <div class="cbar">
+          <div class="cbar-row"><span>Magnésium</span><span style="color:#c9a84c">Moyen</span></div>
+          <div class="cbar-track"><div class="cbar-fill f-mid"></div></div>
+        </div>
+        <div class="cbar">
+          <div class="cbar-row"><span>Fer</span><span style="color:#7a9a72">Correct</span></div>
+          <div class="cbar-track"><div class="cbar-fill f-ok"></div></div>
+        </div>
+
+        <div class="menu-box">
+          <div class="ph-label" style="margin-bottom:8px">Menu IA — Exemple</div>
+          <div class="menu-row">
+            <span class="menu-icon">🌅</span>
+            <div><div class="menu-name">Porridge & graines de courge</div><div class="menu-tag">+ Magnésium · Vit D</div></div>
+            <div class="menu-kcal">~320 kcal</div>
+          </div>
+          <div class="menu-row">
+            <span class="menu-icon">☀️</span>
+            <div><div class="menu-name">Saumon & épinards sautés</div><div class="menu-tag">+ Oméga-3 · Vit D</div></div>
+            <div class="menu-kcal">~500 kcal</div>
+          </div>
+          <div class="menu-row" style="margin-bottom:0">
+            <span class="menu-icon">🌙</span>
+            <div><div class="menu-name">Lentilles & riz complet</div><div class="menu-tag">+ Magnésium · Fer</div></div>
+            <div class="menu-kcal">~450 kcal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONSTAT ════ -->
+<section class="sec-constat">
+  <div>
+    <p class="s-label">Le constat</p>
+    <h2 class="s-title">La nutrition générique <em>ne suffit pas.</em></h2>
+    <p class="s-body">
+      Les recommandations nutritionnelles officielles s'adressent à une population moyenne. Or les grandes enquêtes épidémiologiques françaises — ENNS, INCA 3, Esteban — montrent que les carences en magnésium, vitamine D et fer touchent une part massive de la population adulte, souvent sans symptômes visibles.
+    </p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">75<sup>%</sup></div>
+      <div class="stat-desc">des adultes français ont des apports en magnésium inférieurs aux recommandations</div>
+      <div class="stat-source">Étude INCA 3 / SU.VI.MAX — ANSES</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">80<sup>%</sup></div>
+      <div class="stat-desc">des adultes présentent un déficit en vitamine D en hiver</div>
+      <div class="stat-source">Étude ENNS — Santé publique France</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">20<sup>%</sup></div>
+      <div class="stat-desc">des femmes en âge de procréer sont touchées par une carence en fer</div>
+      <div class="stat-source">OMS / ANSES</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:1.55rem;line-height:1.3;">Meilleurs<br>résultats</div>
+      <div class="stat-desc">La nutrition personnalisée produit des changements alimentaires plus importants et durables qu'une approche standard</div>
+      <div class="stat-source">Étude Food4Me, 7 pays européens — EFSA 2019</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FONCTIONNALITÉS ════ -->
+<section class="sec-feat">
+  <div class="feat-header">
+    <p class="s-label">Ce que fait NutriCore</p>
+    <h2 class="s-title">Une IA qui <em>comprend</em> votre profil</h2>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h3 class="feat-title">Profil nutritionnel</h3>
+      <p class="feat-desc">Vous renseignez vos habitudes alimentaires, intolérances, bilans biologiques récents et objectifs. L'application construit un profil nutritionnel personnel sur cette base déclarative.</p>
+      <span class="feat-chip">Saisie initiale</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3 class="feat-title">Visualisation de vos apports</h3>
+      <p class="feat-desc">Sur la base des données que vous renseignez et de vos bilans biologiques importés, l'application compare vos apports aux valeurs de référence nutritionnelles de l'ANSES et vous propose des pistes d'amélioration alimentaire.</p>
+      <span class="feat-chip">Aide à la décision</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🍽️</div>
+      <h3 class="feat-title">Menus générés par IA</h3>
+      <p class="feat-desc">L'IA compose un menu complet — petit-déjeuner, déjeuner, dîner et collations — calculé pour optimiser vos apports en micronutriments déficitaires tout en respectant vos préférences.</p>
+      <span class="feat-chip">Génération IA</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <h3 class="feat-title">Objectifs personnalisés</h3>
+      <p class="feat-desc">Rééquilibrage alimentaire, gestion du poids, énergie au quotidien, préférences sportives… chaque objectif déclaré oriente la composition des suggestions de menus.</p>
+      <span class="feat-chip">Multi-objectifs</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👨‍🍳</div>
+      <h3 class="feat-title">Recettes & instructions</h3>
+      <p class="feat-desc">Pour chaque plat suggéré : recette détaillée, temps de préparation estimé, liste de courses et alternatives selon vos préférences ou contraintes de budget.</p>
+      <span class="feat-chip">Guide culinaire</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📈</div>
+      <h3 class="feat-title">Suivi dans le temps</h3>
+      <p class="feat-desc">Visualisez l'évolution de vos apports nutritionnels. À chaque mise à jour de profil ou de bilan, le plan alimentaire est recalculé pour rester adapté.</p>
+      <span class="feat-chip">Suivi continu</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PARCOURS ════ -->
+<section class="sec-flow">
+  <div class="flow-header">
+    <p class="s-label">Comment ça fonctionne</p>
+    <h2 class="s-title">De votre profil à votre <em>assiette</em></h2>
+  </div>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-emoji">📋</div>
+      <h4 class="flow-title">Bilan de départ</h4>
+      <p class="flow-desc">Renseignez vos habitudes alimentaires, vos intolérances et importez vos bilans biologiques récents.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-emoji">🔬</div>
+      <h4 class="flow-title">Comparaison aux références</h4>
+      <p class="flow-desc">L'application compare vos apports déclarés aux valeurs de référence nutritionnelles (VNR) de l'ANSES et met en évidence les écarts éventuels.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-emoji">🤖</div>
+      <h4 class="flow-title">Menu suggéré</h4>
+      <p class="flow-desc">Un menu complet est généré pour vous, tenant compte de vos apports déclarés, de vos préférences alimentaires et de vos objectifs.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-emoji">📊</div>
+      <h4 class="flow-title">Suivi continu</h4>
+      <p class="flow-desc">Vos apports sont tracés dans le temps. Le plan se recalcule à chaque mise à jour de votre profil ou de vos bilans.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXEMPLE MENU ════ -->
+<section class="sec-demo">
+  <div>
+    <p class="s-label">Exemple de menu IA</p>
+    <h2 class="s-title">Chaque repas a <em>une raison</em> d'être.</h2>
+    <p class="s-body">
+      Chaque plat est sélectionné pour sa contribution précise à votre profil nutritionnel. Les aliments riches en vitamine D (saumon, œufs, champignons) ou en magnésium (légumineuses, noix, chocolat noir) sont prioritairement suggérés si votre profil le nécessite.
+    </p>
+    <div class="demo-chips">
+      <span class="chip chip-g">📋 Basé sur vos bilans biologiques</span>
+      <span class="chip chip-c">🔄 Recalculé à chaque mise à jour</span>
+      <span class="chip chip-o">🎯 Adapté à vos objectifs déclarés</span>
+    </div>
+  </div>
+
+  <div class="menu-card">
+    <div class="menu-card-head">
+      <div class="menu-av">🌿</div>
+      <div>
+        <div class="menu-uname">Profil fictif — exemple illustratif</div>
+        <div class="menu-usub">Objectif : Énergie & Immunité · Vit D insuffisante</div>
+      </div>
+      <div class="menu-badge">Menu IA</div>
+    </div>
+    <div class="menu-day-label">Exemple de journée — calories indicatives (~)</div>
+    <div class="meal-row">
+      <span class="meal-time">7h30</span>
+      <div class="meal-info">
+        <div class="meal-name">Porridge avoine, lait enrichi & graines de courge</div>
+        <div class="meal-pills">
+          <span class="pill po">Vit D</span>
+          <span class="pill po">Magnésium</span>
+          <span class="pill po">Zinc</span>
+        </div>
+        <div class="meal-note">Apport Vitamine D</div>
+      </div>
+      <div class="meal-kcal">~310 kcal</div>
+    </div>
+    <div class="meal-row">
+      <span class="meal-time">12h30</span>
+      <div class="meal-info">
+        <div class="meal-name">Saumon mi-cuit, lentilles corail & épinards sautés</div>
+        <div class="meal-pills">
+          <span class="pill pg">Oméga-3</span>
+          <span class="pill pg">Fer</span>
+          <span class="pill po">Vit D</span>
+        </div>
+        <div class="meal-note">Apport Vitamine D & Fer</div>
+      </div>
+      <div class="meal-kcal">~540 kcal</div>
+    </div>
+    <div class="meal-row">
+      <span class="meal-time">16h00</span>
+      <div class="meal-info">
+        <div class="meal-name">Amandes & chocolat noir 85%</div>
+        <div class="meal-pills">
+          <span class="pill po">Magnésium</span>
+        </div>
+      </div>
+      <div class="meal-kcal">~180 kcal</div>
+    </div>
+    <div class="meal-row">
+      <span class="meal-time">19h30</span>
+      <div class="meal-info">
+        <div class="meal-name">Tempeh grillé, riz basmati & champignons shiitake</div>
+        <div class="meal-pills">
+          <span class="pill pg">Vit D</span>
+          <span class="pill pc">Protéines</span>
+          <span class="pill po">Sélénium</span>
+        </div>
+        <div class="meal-note">Source de Vitamine D & Sélénium</div>
+      </div>
+      <div class="meal-kcal">~480 kcal</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ OBJECTIFS ════ -->
+<section class="sec-goals">
+  <div class="goals-head">
+    <p class="s-label">Profils ciblés</p>
+    <h2 class="s-title">Chaque profil, <em>chaque objectif</em></h2>
+  </div>
+  <div class="goals-grid">
+    <div class="goal-pill"><span class="goal-emoji">⚖️</span><div class="goal-label">Gestion du poids</div></div>
+    <div class="goal-pill"><span class="goal-emoji">💪</span><div class="goal-label">Alimentation sportive</div></div>
+    <div class="goal-pill"><span class="goal-emoji">⚡</span><div class="goal-label">Énergie au quotidien</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🥗</span><div class="goal-label">Rééquilibrage alimentaire</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🌱</span><div class="goal-label">Alimentation végétale</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🧘</span><div class="goal-label">Bien-être au quotidien</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🤰</span><div class="goal-label">Besoins spécifiques grossesse</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🏃</span><div class="goal-label">Endurance & récupération</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🍽️</span><div class="goal-label">Diversification alimentaire</div></div>
+    <div class="goal-pill"><span class="goal-emoji">🌿</span><div class="goal-label">Confort digestif</div></div>
+  </div>
+</section>
+
+<!-- ════ CAS D'USAGE ════ -->
+<section class="sec-cases">
+  <div class="cases-head">
+    <p class="s-label">À qui s'adresse NutriCore</p>
+    <h2 class="s-title">Cas d'usage <em>illustratifs</em></h2>
+    <p class="note">Ces profils sont des exemples représentatifs basés sur des données épidémiologiques réelles — pas des témoignages.</p>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card">
+      <div class="case-icon">🥗</div>
+      <span class="case-chip cc1">Profil illustratif</span>
+      <h3 class="case-title">Personne souhaitant rééquilibrer son alimentation</h3>
+      <p class="case-desc">Ses habitudes alimentaires déclarées et ses bilans biologiques importés montrent des apports faibles en fer et vitamine B9. NutriCore suggère des repas incluant légumineuses, foie de volaille et agrumes, conformément aux recommandations de l'ANSES.</p>
+      <p class="case-profile">Adulte actif · Objectif : améliorer ses apports en fer et vitamine B9</p>
+    </div>
+    <div class="case-card">
+      <div class="case-icon">🏃</div>
+      <span class="case-chip cc2">Profil illustratif</span>
+      <h3 class="case-title">Sportif amateur souhaitant adapter son alimentation</h3>
+      <p class="case-desc">Ses apports déclarés en magnésium et vitamine D sont inférieurs aux valeurs de référence nutritionnelles — deux des apports les plus fréquemment insuffisants en France selon l'ANSES (INCA 3, ENNS). NutriCore ajuste ses suggestions de menus en conséquence.</p>
+      <p class="case-profile">Adulte pratiquant une activité sportive régulière · Objectif : adapter ses apports à son mode de vie</p>
+    </div>
+    <div class="case-card">
+      <div class="case-icon">🤰</div>
+      <span class="case-chip cc3">Profil illustratif</span>
+      <h3 class="case-title">Personne aux besoins nutritionnels spécifiques</h3>
+      <p class="case-desc">Certaines périodes de vie — grossesse, allaitement, post-partum — s'accompagnent de besoins accrus en iode, oméga-3 et vitamine B9 selon l'ANSES. NutriCore tient compte de ces besoins déclarés pour orienter ses suggestions alimentaires.</p>
+      <p class="case-profile">Adulte en période à besoins spécifiques · Objectif : adapter ses apports à sa situation</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FIN ════ -->
+<section class="sec-end">
+  <p class="end-label">Projet en développement</p>
+  <h2 class="end-title">Intéressé par<br><em>NutriCore ?</em></h2>
+  <p class="end-sub">
+    L'application est en cours de développement. Pour en savoir plus, participer à la bêta ou discuter d'un partenariat, contactez-nous directement.
+  </p>
+  <p class="end-contact"><strong>contact@nutricore.app</strong></p>
+</section>
+
+<!-- ════ MENTION LÉGALE ════ -->
+<section style="background:var(--warm);padding:40px 80px;border-top:1px solid var(--sand);">
+  <p style="font-size:.75rem;color:var(--ink-50);line-height:1.85;max-width:860px;margin:0 auto;text-align:center;">
+    <strong style="color:var(--ink);">⚠️ Information importante</strong><br>
+    NutriCore est un outil d'aide à la décision alimentaire à usage informatif. Il ne constitue en aucun cas un acte médical, un diagnostic, ni un avis médical ou diététique. Les suggestions générées ne remplacent pas les conseils d'un médecin, d'un diététicien-nutritionniste ou de tout autre professionnel de santé habilité. En cas de problème de santé, de symptômes persistants ou de doute sur votre état nutritionnel, consultez un professionnel de santé. Les valeurs de référence utilisées sont issues des recommandations de l'ANSES (Agence nationale de sécurité sanitaire de l'alimentation, de l'environnement et du travail).
+  </p>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-logo">Nutri<span>Core</span></div>
+  <div class="footer-copy">© 2026 NutriCore — Concept en développement · Aucune donnée médicale collectée à ce stade</div>
+</footer>
+
+</body>
+</html>
