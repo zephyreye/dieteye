@@ -173,18 +173,6 @@
     .sec-b2b-partners,.sec-b2b-model,.sec-b2b-features,.sec-b2b-end { padding:60px 20px; }
     .sec-b2b-hero { padding:96px 24px 60px; min-height:auto; }
   }
-  @media (max-width:480px) {
-    .lang-switcher, .view-switcher {
-      position: fixed;
-      left: 50%; right: auto;
-      transform: translateX(-50%);
-    }
-    .view-switcher { top: 10px; }
-    .lang-switcher { top: 54px; }
-    .view-btn, .lang-btn { font-size:.6rem; letter-spacing:.03em; padding:5px 11px; }
-    .hero-left { padding-top: 150px; }
-    .sec-b2b-hero { padding-top: 190px; }
-  }
 
   /* ══ HERO ══ */
   .hero {
@@ -416,13 +404,26 @@
     .end-title { font-size: clamp(2rem,8vw,3rem); }
     footer { padding: 24px 20px; gap: 10px; }
     .footer-copy { font-size: .62rem; text-align: center; }
-    .lang-switcher { top: 12px; right: 12px; }
   }
   @media (max-width:380px) {
     .goals-grid { grid-template-columns: 1fr 1fr; }
     .feat-grid  { grid-template-columns: 1fr; }
     .hero-title { font-size: 2.4rem; }
     .badge { font-size: .6rem; padding: 5px 11px; }
+  }
+
+  /* ══ FINAL OVERRIDE — SWITCHER STACKING (must stay last to win the cascade) ══ */
+  @media (max-width:700px) {
+    .lang-switcher, .view-switcher {
+      position: fixed !important;
+      left: 50% !important; right: auto !important;
+      transform: translateX(-50%) !important;
+    }
+    .view-switcher { top: 10px !important; }
+    .lang-switcher { top: 54px !important; }
+    .view-btn, .lang-btn { font-size:.6rem !important; letter-spacing:.03em !important; padding:5px 11px !important; }
+    .hero-left { padding-top: 150px !important; }
+    .sec-b2b-hero { padding-top: 190px !important; }
   }
 </style>
 </head>
