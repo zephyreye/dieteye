@@ -167,10 +167,23 @@
   }
   @media (max-width:600px) {
     .b2b-partners-grid { grid-template-columns:1fr; }
-    .b2b-stats-row { gap:28px; }
-    .b2b-stat-num { font-size:1.9rem; }
+    .b2b-stats-row { gap:20px; margin-top:40px; }
+    .b2b-stat-num { font-size:1.7rem; }
+    .b2b-stat-label { font-size:.62rem; max-width:120px; }
     .sec-b2b-partners,.sec-b2b-model,.sec-b2b-features,.sec-b2b-end { padding:60px 20px; }
-    .view-switcher { top: 12px; left: 12px; }
+    .sec-b2b-hero { padding:96px 24px 60px; min-height:auto; }
+  }
+  @media (max-width:480px) {
+    .lang-switcher, .view-switcher {
+      position: fixed;
+      left: 50%; right: auto;
+      transform: translateX(-50%);
+    }
+    .view-switcher { top: 10px; }
+    .lang-switcher { top: 54px; }
+    .view-btn, .lang-btn { font-size:.6rem; letter-spacing:.03em; padding:5px 11px; }
+    .hero-left { padding-top: 150px; }
+    .sec-b2b-hero { padding-top: 190px; }
   }
 
   /* ══ HERO ══ */
@@ -381,7 +394,7 @@
     footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px; }
   }
   @media (max-width:600px) {
-    .hero-left { padding: 56px 24px 64px; }
+    .hero-left { padding: 96px 24px 64px; }
     .hero-title { font-size: clamp(2.6rem,10vw,3.5rem); }
     .hero-sub { font-size: .9rem; }
     .sec-constat,.sec-feat,.sec-flow,.sec-demo,.sec-goals,.sec-cases,.sec-end { padding: 60px 20px; }
