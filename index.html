@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dieteye</title>
@@ -59,6 +58,120 @@
     color: white;
   }
   .lang-btn:hover:not(.active) { color: rgba(255,255,255,.8); }
+
+  /* ══ VIEW SWITCHER (B2C / B2B) ══ */
+  .view-switcher {
+    position: fixed;
+    top: 20px; left: 24px;
+    z-index: 1000;
+    display: flex;
+    background: rgba(28,35,24,.7);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 100px;
+    padding: 4px;
+    backdrop-filter: blur(12px);
+    gap: 2px;
+  }
+  .view-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .7rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    padding: 6px 16px; border-radius: 100px;
+    transition: all .25s ease;
+  }
+  .view-btn.active { background: var(--clay); color: white; }
+  .view-btn:hover:not(.active) { color: rgba(255,255,255,.8); }
+
+  .view-b2b { display: none; }
+
+  /* ══ B2B SPECIFIC ══ */
+  .sec-b2b-hero {
+    min-height: 100vh; background: var(--ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 40px; position: relative; overflow: hidden;
+  }
+  .sec-b2b-hero .hero-title { font-size: clamp(2.6rem,4.5vw,4.6rem); }
+  .sec-b2b-hero .hero-sub { max-width: 620px; margin-left:auto; margin-right:auto; text-align:center; }
+
+  .b2b-stats-row {
+    display:flex; gap:48px; justify-content:center; margin-top:56px; flex-wrap:wrap; position:relative; z-index:2;
+  }
+  .b2b-stat { text-align:center; }
+  .b2b-stat-num { font-family:'Cormorant Garamond',serif; font-size:2.4rem; color:var(--gold); font-weight:300; }
+  .b2b-stat-label { font-size:.7rem; color:rgba(255,255,255,.5); letter-spacing:.05em; margin-top:4px; }
+
+  .sec-b2b-partners { background:var(--cream); padding:120px 80px; }
+  .b2b-partners-head { text-align:center; margin-bottom:64px; }
+  .b2b-partners-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .b2b-partner-card {
+    background:var(--white); border:1px solid var(--warm); border-radius:20px;
+    padding:30px 24px; text-align:center; transition:transform .3s,box-shadow .3s;
+  }
+  .b2b-partner-card:hover { transform:translateY(-4px); box-shadow:0 16px 36px rgba(28,35,24,.07); }
+  .b2b-partner-icon { font-size:2rem; margin-bottom:14px; }
+  .b2b-partner-title { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--ink); margin-bottom:8px; }
+  .b2b-partner-desc { font-size:.78rem; color:var(--ink-50); line-height:1.65; }
+
+  .sec-b2b-model { background:var(--ink); padding:120px 80px; position:relative; overflow:hidden; }
+  .sec-b2b-model::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 70% 60% at 80% 20%,rgba(176,124,90,.14) 0%,transparent 70%),
+               radial-gradient(ellipse 50% 50% at 10% 80%,rgba(201,168,76,.07) 0%,transparent 60%);
+  }
+  .b2b-model-head { text-align:center; margin-bottom:72px; position:relative; z-index:1; }
+  .b2b-model-head .s-label { color:var(--clay); }
+  .b2b-model-head .s-title { color:var(--white); }
+  .b2b-model-head .s-title em { color:var(--gold); }
+  .b2b-model-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; position:relative; z-index:1; }
+  .b2b-model-card {
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+    border-radius:22px; padding:36px 30px; transition:all .3s;
+  }
+  .b2b-model-card:hover { border-color:rgba(176,124,90,.35); transform:translateY(-5px); }
+  .b2b-model-num {
+    font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--clay); font-weight:300; margin-bottom:16px;
+  }
+  .b2b-model-title { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--white); margin-bottom:12px; }
+  .b2b-model-desc { font-size:.82rem; color:rgba(255,255,255,.5); line-height:1.75; }
+
+  .sec-b2b-features { background:var(--cream); padding:120px 80px; }
+  .b2b-feat-head { text-align:center; margin-bottom:72px; }
+  .b2b-feat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  .b2b-feat-row {
+    display:flex; gap:20px; align-items:flex-start;
+    background:var(--white); border:1px solid var(--warm); border-radius:20px; padding:28px;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .b2b-feat-row:hover { transform:translateY(-3px); box-shadow:0 14px 32px rgba(28,35,24,.06); }
+  .b2b-feat-icon {
+    width:44px; height:44px; flex-shrink:0; border-radius:12px;
+    background:rgba(176,124,90,.12); display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  }
+  .b2b-feat-title { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--ink); margin-bottom:6px; }
+  .b2b-feat-desc { font-size:.8rem; color:var(--ink-50); line-height:1.65; }
+
+  .sec-b2b-end {
+    background:linear-gradient(135deg,var(--clay),#7a4e33); padding:100px 80px; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .sec-b2b-end .end-label { color:#f0ddd0; }
+  .sec-b2b-end .end-title em { color:var(--gold); }
+
+  @media (max-width:960px) {
+    .b2b-partners-grid { grid-template-columns:1fr 1fr; }
+    .b2b-model-grid { grid-template-columns:1fr; }
+    .b2b-feat-grid { grid-template-columns:1fr; }
+    .sec-b2b-partners,.sec-b2b-model,.sec-b2b-features,.sec-b2b-end { padding:80px 48px; }
+  }
+  @media (max-width:600px) {
+    .b2b-partners-grid { grid-template-columns:1fr; }
+    .b2b-stats-row { gap:28px; }
+    .b2b-stat-num { font-size:1.9rem; }
+    .sec-b2b-partners,.sec-b2b-model,.sec-b2b-features,.sec-b2b-end { padding:60px 20px; }
+    .view-switcher { top: 12px; left: 12px; }
+  }
 
   /* ══ HERO ══ */
   .hero {
@@ -307,6 +420,14 @@
   <button class="lang-btn active" onclick="setLang('fr')">FR</button>
   <button class="lang-btn" onclick="setLang('en')">EN</button>
 </div>
+
+<!-- ════ VIEW SWITCHER ════ -->
+<div class="view-switcher">
+  <button class="view-btn active" onclick="setView('b2c')"><span data-fr="Particuliers" data-en="Individuals"></span></button>
+  <button class="view-btn" onclick="setView('b2b')"><span data-fr="Professionnels" data-en="Business"></span></button>
+</div>
+
+<div class="view-b2c">
 
 <!-- ════ HERO ════ -->
 <section class="hero">
@@ -592,8 +713,160 @@
   <p class="end-label" data-fr="Projet en développement" data-en="Currently in development"></p>
   <h2 class="end-title"><span data-fr="Intéressé par" data-en="Want to be part of"></span><br><em>Dieteye ?</em></h2>
   <p class="end-sub" data-fr="L'application est en cours de développement. Pour en savoir plus, participer à la bêta ou discuter d'un partenariat, contactez-nous directement." data-en="We're building something that matters. If you'd like to learn more, join the beta or explore a partnership — we'd love to hear from you."></p>
-  <p class="end-contact"><strong>amine.cader@gmail.com</strong></p>
+  <p class="end-contact"><strong>amine.cader@dieteye.eu</strong></p>
 </section>
+
+</div>
+<!-- ════ END OF B2C VIEW ════ -->
+
+<!-- ════════════════════════════════ -->
+<!-- ════ B2B VIEW ════ -->
+<!-- ════════════════════════════════ -->
+<div class="view-b2b">
+
+<!-- ════ B2B HERO ════ -->
+<section class="sec-b2b-hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="badge" style="margin:0 auto 36px;"><span data-fr="Solution B2B · Nutrition personnalisée à l'échelle" data-en="B2B Solution · Personalised nutrition at scale"></span></div>
+  <h1 class="hero-title">
+    <span data-fr="Donnez à vos" data-en="Give your"></span> <em><span data-fr="clients" data-en="clients"></span></em><br>
+    <span data-fr="un vrai avantage" data-en="a real"></span> <span class="g"><span data-fr="nutritionnel." data-en="nutritional edge."></span></span>
+  </h1>
+  <p class="hero-sub" data-fr="Dieteye s'intègre à votre structure — salle de sport, cabinet, mutuelle ou entreprise — pour offrir à vos membres un accompagnement nutritionnel personnalisé, basé sur leurs données biologiques réelles." data-en="Dieteye plugs into your business — gym, clinic, insurer or company — to give your members personalised nutrition guidance built on their actual biological data."></p>
+  <div class="b2b-stats-row">
+    <div class="b2b-stat">
+      <div class="b2b-stat-num">75<span style="font-size:1.2rem">%</span></div>
+      <div class="b2b-stat-label" data-fr="d'adultes en carence de magnésium" data-en="of adults magnesium deficient"></div>
+    </div>
+    <div class="b2b-stat">
+      <div class="b2b-stat-num">80<span style="font-size:1.2rem">%</span></div>
+      <div class="b2b-stat-label" data-fr="en déficit de vitamine D en hiver" data-en="vitamin D deficient in winter"></div>
+    </div>
+    <div class="b2b-stat">
+      <div class="b2b-stat-num" data-fr="Sur-mesure" data-en="Tailored"></div>
+      <div class="b2b-stat-label" data-fr="intégration à votre marque" data-en="white-label integration"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ QUI CIBLE-T-ON ════ -->
+<section class="sec-b2b-partners">
+  <div class="b2b-partners-head">
+    <p class="s-label" data-fr="Partenaires potentiels" data-en="Who we work with"></p>
+    <h2 class="s-title"><span data-fr="Une solution pensée pour" data-en="Built for the businesses"></span> <em><span data-fr="votre secteur" data-en="you run"></span></em></h2>
+  </div>
+  <div class="b2b-partners-grid">
+    <div class="b2b-partner-card">
+      <div class="b2b-partner-icon">🏋️</div>
+      <h3 class="b2b-partner-title" data-fr="Salles de sport" data-en="Gyms & fitness clubs"></h3>
+      <p class="b2b-partner-desc" data-fr="Prolongez l'accompagnement de vos membres au-delà de la salle, jusque dans leur assiette." data-en="Extend your members' coaching beyond the gym floor and into their kitchen."></p>
+    </div>
+    <div class="b2b-partner-card">
+      <div class="b2b-partner-icon">🩺</div>
+      <h3 class="b2b-partner-title" data-fr="Cabinets & cliniques" data-en="Clinics & practitioners"></h3>
+      <p class="b2b-partner-desc" data-fr="Donnez à vos patients un suivi nutritionnel entre deux consultations." data-en="Give your patients ongoing nutritional support between appointments."></p>
+    </div>
+    <div class="b2b-partner-card">
+      <div class="b2b-partner-icon">🏢</div>
+      <h3 class="b2b-partner-title" data-fr="Entreprises" data-en="Corporate wellness"></h3>
+      <p class="b2b-partner-desc" data-fr="Intégrez Dieteye à votre programme de bien-être au travail." data-en="Add Dieteye to your employee wellbeing program."></p>
+    </div>
+    <div class="b2b-partner-card">
+      <div class="b2b-partner-icon">🛡️</div>
+      <h3 class="b2b-partner-title" data-fr="Mutuelles & assurances" data-en="Insurers & health plans"></h3>
+      <p class="b2b-partner-desc" data-fr="Proposez la prévention nutritionnelle comme service à valeur ajoutée." data-en="Offer nutritional prevention as a genuine value-added service."></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ MODÈLE DE COLLABORATION ════ -->
+<section class="sec-b2b-model">
+  <div class="b2b-model-head">
+    <p class="s-label" data-fr="Comment on travaille ensemble" data-en="How we work together"></p>
+    <h2 class="s-title"><span data-fr="Une intégration" data-en="Integration that's"></span> <em><span data-fr="simple et sur-mesure" data-en="simple and tailored"></span></em></h2>
+  </div>
+  <div class="b2b-model-grid">
+    <div class="b2b-model-card">
+      <div class="b2b-model-num">01</div>
+      <h3 class="b2b-model-title" data-fr="Accès dédié pour vos membres" data-en="Dedicated access for your members"></h3>
+      <p class="b2b-model-desc" data-fr="Vos clients accèdent à Dieteye via votre structure, avec un parcours pensé à votre image." data-en="Your clients access Dieteye through your business, with an experience shaped around your brand."></p>
+    </div>
+    <div class="b2b-model-card">
+      <div class="b2b-model-num">02</div>
+      <h3 class="b2b-model-title" data-fr="Vous restez au centre de la relation" data-en="You stay at the center of the relationship"></h3>
+      <p class="b2b-model-desc" data-fr="Nous prolongeons votre accompagnement, nous ne le remplaçons pas. Vous gardez la crédibilité et le lien client." data-en="We extend your support — we don't replace it. You keep the credibility and the client relationship."></p>
+    </div>
+    <div class="b2b-model-card">
+      <div class="b2b-model-num">03</div>
+      <h3 class="b2b-model-title" data-fr="Un modèle qui s'adapte à vous" data-en="A model that adapts to you"></h3>
+      <p class="b2b-model-desc" data-fr="Licence mensuelle par membre actif, ou intégration à votre offre premium existante. On construit ça ensemble." data-en="Monthly license per active member, or integration into your existing premium offer. We build it together."></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FONCTIONNALITÉS B2B ════ -->
+<section class="sec-b2b-features">
+  <div class="b2b-feat-head">
+    <p class="s-label" data-fr="Pour votre équipe" data-en="For your team"></p>
+    <h2 class="s-title"><span data-fr="Des outils pensés pour" data-en="Tools built for"></span> <em><span data-fr="les professionnels" data-en="professionals"></span></em></h2>
+  </div>
+  <div class="b2b-feat-grid">
+    <div class="b2b-feat-row">
+      <div class="b2b-feat-icon">📊</div>
+      <div>
+        <h3 class="b2b-feat-title" data-fr="Tableau de bord multi-clients" data-en="Multi-client dashboard"></h3>
+        <p class="b2b-feat-desc" data-fr="Suivez d'un coup d'œil l'ensemble de vos membres et leur progression nutritionnelle." data-en="See all your members and their nutritional progress at a glance."></p>
+      </div>
+    </div>
+    <div class="b2b-feat-row">
+      <div class="b2b-feat-icon">🎨</div>
+      <div>
+        <h3 class="b2b-feat-title" data-fr="Marque blanche" data-en="White-label branding"></h3>
+        <p class="b2b-feat-desc" data-fr="L'application peut porter vos couleurs et votre identité visuelle." data-en="The app can carry your colours and visual identity."></p>
+      </div>
+    </div>
+    <div class="b2b-feat-row">
+      <div class="b2b-feat-icon">👥</div>
+      <div>
+        <h3 class="b2b-feat-title" data-fr="Onboarding en masse" data-en="Bulk onboarding"></h3>
+        <p class="b2b-feat-desc" data-fr="Intégrez vos membres existants en quelques clics, sans friction." data-en="Bring your existing members onboard in a few clicks, no friction."></p>
+      </div>
+    </div>
+    <div class="b2b-feat-row">
+      <div class="b2b-feat-icon">🔌</div>
+      <div>
+        <h3 class="b2b-feat-title" data-fr="Intégration à vos outils" data-en="Integrates with your tools"></h3>
+        <p class="b2b-feat-desc" data-fr="Connectez Dieteye à votre CRM ou logiciel de gestion existant." data-en="Connect Dieteye to your existing CRM or management software."></p>
+      </div>
+    </div>
+    <div class="b2b-feat-row">
+      <div class="b2b-feat-icon">📄</div>
+      <div>
+        <h3 class="b2b-feat-title" data-fr="Rapports exportables" data-en="Exportable reports"></h3>
+        <p class="b2b-feat-desc" data-fr="Générez des rapports de suivi nutritionnel pour vos échanges avec vos clients." data-en="Generate nutritional tracking reports for your client conversations."></p>
+      </div>
+    </div>
+    <div class="b2b-feat-row">
+      <div class="b2b-feat-icon">🔒</div>
+      <div>
+        <h3 class="b2b-feat-title" data-fr="Conformité RGPD & HDS" data-en="GDPR & health data compliance"></h3>
+        <p class="b2b-feat-desc" data-fr="Hébergement conforme aux exigences françaises sur les données de santé." data-en="Hosting compliant with French health data requirements."></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ B2B END ════ -->
+<section class="sec-b2b-end">
+  <p class="end-label" data-fr="Construisons ensemble" data-en="Let's build this together"></p>
+  <h2 class="end-title"><span data-fr="Discutons de votre" data-en="Let's talk about your"></span><br><em><span data-fr="projet" data-en="project"></span></em></h2>
+  <p class="end-sub" data-fr="Nous sommes en phase de construction et cherchons des partenaires pour co-construire la meilleure version de Dieteye. Parlons-en." data-en="We're in the build phase and looking for the right partners to help shape Dieteye. Let's talk."></p>
+  <p class="end-contact"><strong>amine.cader@dieteye.eu</strong></p>
+</section>
+
+</div>
+<!-- ════ END OF B2B VIEW ════ -->
 
 <!-- ════ MENTION LÉGALE ════ -->
 <section style="background:var(--warm);padding:40px 80px;border-top:1px solid var(--sand);">
@@ -620,8 +893,16 @@
       btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
     });
   }
-  // Init FR by default
+  function setView(view) {
+    document.querySelector('.view-b2c').style.display = (view === 'b2c') ? 'block' : 'none';
+    document.querySelector('.view-b2b').style.display = (view === 'b2b') ? 'block' : 'none';
+    document.querySelectorAll('.view-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', (i === 0 && view === 'b2c') || (i === 1 && view === 'b2b'));
+    });
+  }
+  // Init defaults
   setLang('fr');
+  setView('b2c');
 </script>
 
 </body>
